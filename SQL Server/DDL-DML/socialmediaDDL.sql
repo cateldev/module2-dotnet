@@ -1,0 +1,26 @@
+CREATE DATABASE db_marketplace
+
+USE db_social
+
+CREATE TABLE Users(
+	Id INT PRIMARY KEY NOT NULL,
+	userName VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	userPassword VARCHAR(100) NOT NULL,
+	userPhoto VARCHAR (200) NULL
+)
+
+CREATE TABLE Themes(
+	Id INT PRIMARY KEY NOT NULL,
+	webDescription VARCHAR(50)
+)
+
+CREATE TABLE Posts(
+	Id INT PRIMARY KEY NOT NULL,
+	postTitle VARCHAR(50) NOT NULL,
+	postText VARCHAR (2000) NOT NULL,
+	FK_user INT NOT NULL,
+	FK_userTheme INT NOT NULL,
+	FOREIGN KEY (FK_userTheme) REFERENCES Users (id),
+	FOREIGN KEY (FK_user) REFERENCES Users (id)
+)
