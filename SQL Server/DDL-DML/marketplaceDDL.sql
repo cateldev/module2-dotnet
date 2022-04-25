@@ -52,3 +52,66 @@ CREATE TABLE Payment(
 	FOREIGN KEY (FK_product) REFERENCES Products (Id),
 	FOREIGN KEY (FK_idSeller) REFERENCES UserSeller (id)
 )
+
+-- INSERT
+INSERT INTO UserBuyer
+VALUES
+(1, 'matheuscatel', 'catel@email.com', 'catel44887', '98 Sesame St. - SP'),
+(2,  'isabelacatel', 'catel2@email.com', 'catel44887', '98 Sesame St. - SP'),
+(3, 'pedrocatel', 'catel3@email.com', 'catel44887', '98 Sesame St. - SP')
+
+INSERT INTO UserSeller
+VALUES
+(1, 'matheuscatel', 'catel@email.com', 'catel44887', '98 Sesame St. - SP'),
+(2,  'isabelacatel', 'catel2@email.com', 'catel44887', '98 Sesame St. - SP'),
+(3, 'pedrocatel', 'catel3@email.com', 'catel44887', '98 Sesame St. - SP')
+
+
+INSERT INTO Categories
+VALUES
+(1, 'Hardware'),
+(2, 'Headsets')
+
+INSERT INTO Products
+VALUES
+('Redragon Headset', 'Best Redragon headset', 160.00, 3, 1),
+('GPU Geforce', 'Live the future', 4.500, 3, 1),
+('MousePad Razer', 'Smooth and silky', 220.00, 2, 1)
+
+INSERT INTO Shopping
+VALUES
+(1, 3),
+(2, 1),
+(2, 2),
+(2, 2)
+
+INSERT INTO Payment
+VALUES
+(1, 3, 3),
+(2, 1, 2),
+(3, 2, 1),
+(2, 2, 2)
+
+SELECT * FROM UserBuyer
+WHERE userAddress LIKE '%Sesame St%'
+
+SELECT * FROM Products
+WHERE Price BETWEEN 5 AND 15
+
+UPDATE UserBuyer
+SET userName = 'Matheus Catel'
+WHERE Id = 1
+
+SELECT UserBuyer.userName, SUM(Products.Price) AS Total
+FROM UserBuyer
+INNER JOIN Shopping ON UserBuyer.Id = Shopping.FK_buyer
+INNER JOIN Products ON Products.Id = Shopping.FK_product
+GROUP BY UserBuyer.userName;
+
+DELETE Shopping
+DELETE Products
+DELETE UserBuyer
+DELETE UserSeller
+DELETE Categories
+
+select * from UserBuyer
